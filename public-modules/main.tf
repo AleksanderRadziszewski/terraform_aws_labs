@@ -18,13 +18,31 @@ module "vpc" {
 
 
   dhcp_options_domain_name = "internal.example.com"
-  enable_vpn_gateway = true
+  enable_vpn_gateway       = true
 
   vpc_tags = {
     Project     = "public_module"
     Environment = "dev"
   }
-  private_subnet_tags      = { Role = "private" }
-  public_subnet_tags       = { Role = "public" }
+  private_subnet_tags = { Role = "private" }
+  public_subnet_tags  = { Role = "public" }
 
+}
+
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = file("~/.ssh/id_ed25519.pub")
+}
+
+resource "aws_instance" "example" {
+  ami             = data.aws_ami.amazonlinux2.id
+  key_name        = aws_key_pair.deployer.id
+  instance_type   = "t2.micro"
+  subnet_id       = module.vpc.public_subnets[0]
+  security_groups = [module.vpc.default_security_group_id]
+
+  tags = {
+    Name         = "example-instance-aleksander-radziszewski"
+    Environtment = "dev"
+  }
 }
