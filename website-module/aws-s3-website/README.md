@@ -1,7 +1,22 @@
-<!-- BEGIN_TF_DOCS -->
-## Requirements
+# Exercise description
 
-No requirements.
+## Purpose
+Using a local module to create a website in the S3 bucket
+
+## Instructions
+
+### 1. Check out the module from the folder: `aws-s3-website`
+
+### 2. Create a `main.tf` file in which you will use the above module
+- prepare a simple index.html file in your project
+- use resource: `aws_s3_object`, in which you will add the above file: `index.html` to the bucket created by the module
+
+
+&ensp;
+
+<!-- BEGIN_TF_DOCS -->
+
+# Terraform Docs
 
 ## Providers
 
