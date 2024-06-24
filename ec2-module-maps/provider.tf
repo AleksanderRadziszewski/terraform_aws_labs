@@ -7,6 +7,6 @@ terraform {
     encrypt = true
     region  = "eu-west-1"
     bucket  = "dor12-aleksander-radziszewski-state-bucket"
-    key     = "instance_sets.tfstate"
+    key     = "ec2-module.tfstate"
   }
 }
